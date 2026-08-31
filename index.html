@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wizytówka Jolanty Wicher</title>
+<meta name="description" content="Jolanta Wicher — fizjoterapeutka i technik masażysta w Szczecinie. Rehabilitacja z dojazdem do domu pacjenta oraz terapia w gabinecie na Osowie. Cennik, kwalifikacje, kontakt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Schibsted+Grotesk:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #EEF1F6;
+    --glow: rgba(197, 106, 61, 0.10);
+    --surface: #FFFFFF;
+    --ink: #1C2433;
+    --muted: #55617A;
+    --accent: #2F5AA6;
+    --accent-strong: #24488A;
+    --accent-soft: #DCE6F6;
+    --accent-warm: #C56A3D;
+    --line: #DCE2EE;
+    --btn-ink: #FFFFFF;
+    --shadow: rgba(28, 36, 51, 0.14);
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151C;
+      --glow: rgba(224, 137, 92, 0.09);
+      --surface: #1A1F2A;
+      --ink: #EEF1F7;
+      --muted: #9AA6BE;
+      --accent: #7AA5E6;
+      --accent-strong: #A9C6F0;
+      --accent-soft: #22314B;
+      --accent-warm: #E0895C;
+      --line: #2A3140;
+      --btn-ink: #12151C;
+      --shadow: rgba(0, 0, 0, 0.5);
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12151C;
+    --glow: rgba(224, 137, 92, 0.09);
+    --surface: #1A1F2A;
+    --ink: #EEF1F7;
+    --muted: #9AA6BE;
+    --accent: #7AA5E6;
+    --accent-strong: #A9C6F0;
+    --accent-soft: #22314B;
+    --accent-warm: #E0895C;
+    --line: #2A3140;
+    --btn-ink: #12151C;
+    --shadow: rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: radial-gradient(900px 500px at 20% -10%, var(--glow), transparent 60%), var(--bg);
+    color: var(--ink);
+    font-family: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; }
+  a { color: inherit; }
+
+  /* ---------- split-screen shell (układ z wersji 2) ---------- */
+  .shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 900px) {
+    .shell { grid-template-columns: minmax(320px, 38%) 1fr; }
+  }
+
+  .pane-photo {
+    display: none;
+    position: relative;
+    background: var(--accent-soft);
+    min-height: 44vh;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  @media (min-width: 900px) {
+    .pane-photo {
+      display: block;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      min-height: 0;
+      border-bottom: 0;
+      border-right: 1px solid var(--line);
+    }
+  }
+
+  .pane-photo svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .pane-content {
+    background: var(--surface);
+    padding: 0 clamp(1.5rem, 6vw, 5rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 900px) { .pane-content { min-height: 100vh; } }
+
+  .tabs {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    gap: 0.3rem;
+    margin: 0 calc(-1 * clamp(1.5rem, 6vw, 5rem));
+    padding: 0.7rem clamp(1.5rem, 6vw, 5rem);
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tabs a {
+    flex: 0 0 auto;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--muted);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .tabs a:hover { background: var(--accent-soft); color: var(--accent-strong); }
+  .tabs a.is-active { background: var(--accent); color: var(--btn-ink); }
+  .tabs a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .inner {
+    width: 100%;
+    max-width: 660px;
+    padding: clamp(1.9rem, 5vw, 2.75rem) 0 clamp(2.25rem, 6vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.9rem, 5vw, 2.6rem);
+  }
+
+  section[id] { scroll-margin-top: 4.25rem; }
+
+  /* ---------- header (komponenty z wersji 3) ---------- */
+  .head { display: flex; flex-direction: column; }
+
+  .eyebrow {
+    margin: 0 0 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .name {
+    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0 0 0.55rem;
+    color: var(--ink);
+  }
+
+  .role { margin: 0; font-size: 1.12rem; color: var(--muted); }
+
+  .intro { margin: 0; font-size: 1.08rem; }
+
+  /* ---------- section titles ---------- */
+  .h2 {
+    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+  }
+
+  .label {
+    display: block;
+    margin: 0 0 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- offer ---------- */
+  .offer {
+    background: var(--accent-soft);
+    border-radius: 20px;
+    padding: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .offer .label { color: var(--accent-strong); }
+
+  .offer-lead {
+    margin: 0.35rem 0 0.5rem;
+    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1.22rem;
+    color: var(--ink);
+  }
+
+  .offer-body { margin: 0; font-size: 1.02rem; line-height: 1.62; }
+
+  /* ---------- contact ---------- */
+  .callbtn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.3rem;
+    background: var(--accent);
+    color: var(--btn-ink);
+    border-radius: 18px;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .callbtn:hover { transform: translateY(-1px); background: var(--accent-strong); }
+
+  .callbtn .cb-ico {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 13px;
+  }
+
+  .callbtn .cb-ico svg { width: 22px; height: 22px; }
+
+  .callbtn .cb-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .callbtn .cb-num {
+    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+  }
+
+  .contact-meta { display: grid; gap: 0.95rem; margin-top: 1.15rem; }
+  .contact-meta .cm { display: grid; gap: 0.15rem; }
+
+  .contact-meta .cm-k {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .contact-meta .cm-v { font-size: 1.06rem; }
+
+  .contact-meta a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .contact-meta a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- price ---------- */
+  .price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .price-item:last-child { border-bottom: 1px solid var(--line); }
+
+  .price-name { font-weight: 600; font-size: 1.08rem; }
+
+  .price-sub {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .price-figure { text-align: right; white-space: nowrap; }
+
+  .price-amount {
+    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: var(--accent-warm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .price-unit { display: block; font-size: 0.82rem; color: var(--muted); }
+
+  /* ---------- prose / pills / lists ---------- */
+  .prose { margin: 0; font-size: 1.04rem; line-height: 1.62; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+  .pill {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+
+  .sub { margin-top: 1.4rem; }
+
+  .check-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+
+  .check-list li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 0.7rem;
+    align-items: start;
+    font-size: 1.03rem;
+    line-height: 1.5;
+  }
+
+  .check-list li svg { width: 22px; height: 22px; color: var(--accent); margin-top: 0.15rem; flex-shrink: 0; }
+
+  /* ---------- footer ---------- */
+  .foot {
+    margin: 0;
+    padding-top: 1.35rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ---------- focus + motion ---------- */
+  a:focus-visible, .callbtn:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .anim .fx {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: calc(var(--i, 0) * 75ms);
+  }
+
+  .anim body.ready .fx { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    html { scroll-behavior: auto; }
+    .callbtn:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="pane-photo">
+      <svg viewBox="0 0 480 600" role="img" aria-label="Ilustracja poglądowa: kręgosłup i ruch" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="sp-bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#E7EDF7"/>
+            <stop offset="1" stop-color="#F2F4F9"/>
+          </linearGradient>
+          <pattern id="sp-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M40 0H0V40" fill="none" stroke="#6E80A6" stroke-width="1" opacity="0.11"/>
+          </pattern>
+        </defs>
+        <rect width="480" height="600" fill="url(#sp-bg)"/>
+        <rect width="480" height="600" fill="url(#sp-grid)"/>
+        <circle cx="242" cy="300" r="210" fill="#FFFFFF" opacity="0.6"/>
+        <path d="M330 130 A214 214 0 0 1 330 470" fill="none" stroke="#6E80A6" stroke-width="3" stroke-dasharray="2 11" stroke-linecap="round" opacity="0.42"/>
+
+        <circle cx="224" cy="74" r="30" fill="#6E80A6"/>
+
+        <ellipse cx="238" cy="118" rx="26" ry="7" fill="#BAC5DA"/>
+        <ellipse cx="255" cy="167" rx="26" ry="7" fill="#BAC5DA"/>
+        <ellipse cx="266" cy="216" rx="26" ry="7" fill="#BAC5DA"/>
+        <ellipse cx="264" cy="265" rx="26" ry="7" fill="#BAC5DA"/>
+        <ellipse cx="252" cy="314" rx="26" ry="7" fill="#BAC5DA"/>
+        <ellipse cx="234" cy="363" rx="26" ry="7" fill="#BAC5DA"/>
+        <ellipse cx="220" cy="412" rx="26" ry="7" fill="#BAC5DA"/>
+        <ellipse cx="216" cy="461" rx="26" ry="7" fill="#BAC5DA"/>
+
+        <g transform="translate(228 96) rotate(6)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <g transform="translate(247 145) rotate(11)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <g transform="translate(262 194) rotate(9)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <g transform="translate(266 243) rotate(2)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <g transform="translate(259 292) rotate(-6)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <g transform="translate(244 341) rotate(-11)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <g transform="translate(226 390) rotate(-12)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <g transform="translate(216 439) rotate(-7)"><rect x="-32" y="-17" width="64" height="34" rx="15" fill="#6E80A6"/></g>
+        <path d="M180 486 C180 470 200 462 218 462 C244 462 268 474 272 500 C274 520 258 536 232 536 C204 536 180 520 180 500 Z" fill="#6E80A6"/>
+
+        <circle cx="300" cy="250" r="38" fill="#B67E5A" opacity="0.14"/>
+        <circle cx="300" cy="250" r="17" fill="#B67E5A"/>
+        <circle cx="196" cy="300" r="38" fill="#B67E5A" opacity="0.14"/>
+        <circle cx="196" cy="300" r="17" fill="#B67E5A"/>
+      </svg>
+    </div>
+
+    <div class="pane-content">
+      <nav class="tabs" aria-label="Sekcje wizytówki">
+        <a href="#start">Start</a>
+        <a href="#cennik">Cennik</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#terapia">Terapia</a>
+        <a href="#doswiadczenie">Doświadczenie</a>
+      </nav>
+      <div class="inner">
+        <header class="head fx" id="start" style="--i:1">
+          <p class="eyebrow">Fizjoterapia mobilna · Szczecin</p>
+          <h1 class="name">Jolanta Wicher</h1>
+          <p class="role">Fizjoterapeutka · technik masażysta</p>
+        </header>
+
+        <p class="intro fx" style="--i:2">Rehabilitacja z dojazdem do domu pacjenta — a także terapia w gabinecie w Szczecinie, w dzielnicy Osów. Program terapii ustalam indywidualnie, po diagnostyce i określeniu celów.</p>
+
+        <section class="offer fx" id="uslugi" style="--i:3">
+          <span class="label">Główna usługa</span>
+          <p class="offer-lead">Rehabilitacja z dojazdem do pacjenta</p>
+          <p class="offer-body">Terapia w domu pacjenta lub w miejscu wezwania. Ofertę kieruję przede wszystkim do osób starszych, mniej mobilnych oraz mających trudność z samodzielnym dotarciem do gabinetu. Dojazd w promieniu 10 km od Szczecina.</p>
+        </section>
+
+        <section class="fx" id="cennik" style="--i:4">
+          <h2 class="h2">Cennik</h2>
+          <div class="price-item">
+            <span class="price-name">
+              Wizyta z dojazdem do klienta
+              <span class="price-sub">w promieniu 10 km · 1. wizyta ok. 60 min, kolejne ok. 45 min</span>
+            </span>
+            <span class="price-figure">
+              <span class="price-amount">200 zł</span>
+              <span class="price-unit">za wizytę</span>
+            </span>
+          </div>
+          <div class="price-item">
+            <span class="price-name">
+              Fizjoterapia w gabinecie
+              <span class="price-sub">Szczecin, dzielnica Osów</span>
+            </span>
+            <span class="price-figure">
+              <span class="price-amount">100 zł</span>
+              <span class="price-unit">za godzinę</span>
+            </span>
+          </div>
+        </section>
+
+        <section class="fx" id="kontakt" style="--i:5">
+          <h2 class="h2">Kontakt</h2>
+          <a class="callbtn" href="tel:+48500400300">
+            <span class="cb-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span>
+              <span class="cb-label">Zadzwoń, aby umówić wizytę</span><br>
+              <span class="cb-num">507 835 299</span>
+            </span>
+          </a>
+          <div class="contact-meta">
+            <div class="cm">
+              <span class="cm-k">E-mail</span>
+              <span class="cm-v"><a href="mailto:fizjoterapiawicher@gmail.com">fizjoterapiawicher@gmail.com</a></span>
+            </div>
+            <div class="cm">
+              <span class="cm-k">Adres gabinetu</span>
+              <span class="cm-v"><a href="https://www.google.com/maps/search/?api=1&amp;query=Szczecin%20Os%C3%B3w%20ul.%20Wiankowa" target="_blank" rel="noopener">Szczecin, dzielnica Osów, ul. Wiankowa</a></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="fx" id="terapia" style="--i:6">
+          <h2 class="h2">Jak przebiega terapia</h2>
+          <p class="prose">Metody dobieram indywidualnie do potrzeb pacjenta. Każdą terapię poprzedza diagnostyka oraz ustalenie celów terapeutycznych.</p>
+          <div class="pills">
+            <span class="pill">Masaż</span>
+            <span class="pill">Kinezyterapia</span>
+            <span class="pill">Presoterapia</span>
+            <span class="pill">Terapia manualna</span>
+            <span class="pill">Bańka chińska</span>
+            <span class="pill">Flossing</span>
+            <span class="pill">Reedukacja wzorców ruchowych</span>
+          </div>
+        </section>
+
+        <section class="fx" id="doswiadczenie" style="--i:7">
+          <h2 class="h2">Doświadczenie i kwalifikacje</h2>
+
+          <span class="label">Wykształcenie</span>
+          <ul class="check-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              Fizjoterapeutka — absolwentka WSEiT (Wyższa Szkoła Edukacji i Terapii), oddział w Szczecinie, 2020–2025
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              Technik masażysta
+            </li>
+          </ul>
+
+          <div class="sub">
+            <span class="label">Ukończone kursy</span>
+            <div class="pills">
+              <span class="pill">Terapia bańką chińską</span>
+              <span class="pill">Masaż tkanek głębokich (MTG)</span>
+              <span class="pill">Kobido — masaż liftingujący twarzy</span>
+            </div>
+          </div>
+
+          <div class="sub">
+            <span class="label">Praktyki</span>
+            <ul class="check-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                Szpital Rehabilitacyjny im. św. Karola Boromeusza
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                Oddział Rehabilitacji 109. Szpitala Wojskowego
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                Przychodnie i poradnie rehabilitacyjne
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <p class="foot fx" style="--i:8">
+          Jolanta Wicher · fizjoterapeutka, technik masażysta<br>
+          Absolwentka WSEiT w Szczecinie (2020–2025) · fizjoterapia mobilna — Szczecin i okolice (dojazd do 10 km)
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) {
+        document.documentElement.classList.add('anim');
+        window.addEventListener('DOMContentLoaded', function () {
+          requestAnimationFrame(function () { document.body.classList.add('ready'); });
+        });
+      }
+
+      function initTabs() {
+        var tabLinks = Array.prototype.slice.call(document.querySelectorAll('.tabs a'));
+        if (!tabLinks.length) return;
+        var targets = [];
+        tabLinks.forEach(function (a) {
+          var el = document.getElementById(a.getAttribute('href').slice(1));
+          if (el) targets.push({ link: a, el: el });
+        });
+        if (!targets.length) return;
+
+        function setActive(link) {
+          tabLinks.forEach(function (a) {
+            var on = a === link;
+            a.classList.toggle('is-active', on);
+            if (on) a.setAttribute('aria-current', 'true');
+            else a.removeAttribute('aria-current');
+          });
+        }
+
+        var lockUntil = 0;
+
+        function update() {
+          if (Date.now() < lockUntil) return;
+          var line = 100;
+          var current = targets[0];
+          for (var i = 0; i < targets.length; i++) {
+            if (targets[i].el.getBoundingClientRect().top - line <= 1) current = targets[i];
+            else break;
+          }
+          if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+            current = targets[targets.length - 1];
+          }
+          setActive(current.link);
+        }
+
+        tabLinks.forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            setActive(a);
+            lockUntil = Date.now() + 700;
+            if (a.getAttribute('href') === '#start') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            }
+          });
+        });
+
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+      }
+
+      if (document.readyState !== 'loading') initTabs();
+      else document.addEventListener('DOMContentLoaded', initTabs);
+    })();
+  </script>
+</body>
+</html>
